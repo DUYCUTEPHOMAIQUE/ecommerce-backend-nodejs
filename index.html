@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div>OK</div>
+    </div>
+  </body>
+  <script>
+    class Clothing {
+      constructor(message) {
+        this.message = message;
+      }
+      print() {
+        console.log(this.message);
+      }
+    }
+    class Electronics {
+      constructor(message) {
+        this.message = message;
+      }
+      static print() {
+        console.log(this.message);
+      }
+    }
+    const test = {
+      clothing: Clothing,
+      electronics: Electronics,
+    };
+    new test["clothing"]("OK").print();
+  </script>
+</html>

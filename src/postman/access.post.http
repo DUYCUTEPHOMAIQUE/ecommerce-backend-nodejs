@@ -1,0 +1,13 @@
+@url_dev = http://localhost:3056/v1/api
+
+### signUp
+
+POST {{url_dev}}/shop/signup
+Content-Type: application/json
+x-api-key: 076e2e36dff02ea571b431fb54d4c59964177f10b9fdec65ef84ce397520c40658bedfaeaa0239853b25b0891085832ae100dccc89fb3375782241fac005d662
+
+{
+    "name": "SHop TipaJs",
+    "email": "duy@gmail.com",
+    "password": "abc123"
+}
