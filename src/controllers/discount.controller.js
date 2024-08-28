@@ -22,33 +22,33 @@ class DiscountController {
   };
   getAllDiscountCodesWithProduct = async (req, res, next) => {
     new SuccessResponse({
-      message: "create discount code success!",
-      metadata: await getAllDiscountCodesWithProduct(req.body),
+      message: "get discount for user!",
+      metadata: await getAllDiscountCodesWithProduct({ ...req.query }),
     }).send(res);
   };
   getAllDiscountCodeByShop = async (req, res, next) => {
     new SuccessResponse({
       message: "create discount code success!",
-      metadata: await getAllDiscountCodeByShop(req.body),
+      metadata: await getAllDiscountCodeByShop({ ...req.body }),
     }).send(res);
   };
   getDiscountAmount = async (req, res, next) => {
     new SuccessResponse({
       message: "create discount code success!",
-      metadata: await getDiscountAmount(req.body),
+      metadata: await getDiscountAmount({ ...req.body }),
     }).send(res);
   };
   cancelDiscount = async (req, res, next) => {
     new SuccessResponse({
       message: "create discount code success!",
-      metadata: await cancelDiscount(req.body),
+      metadata: await cancelDiscount({ ...req.body }),
     }).send(res);
   };
 
   deleteDiscount = async (req, res, next) => {
     new SuccessResponse({
       message: "create discount code success!",
-      metadata: await deleteDiscount(req.params),
+      metadata: await deleteDiscount({ ...req.params }),
     }).send(res);
   };
 }

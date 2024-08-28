@@ -1,7 +1,10 @@
 "use strict";
 const { BadRequestError, NotFoundError } = require("../core/error.response");
 const discountModel = require("../models/discount.model");
-const { convertToObjectIdMongodb } = require("../utils");
+const {
+  convertToObjectIdMongodb,
+  discountProductIdsToObjectId,
+} = require("../utils");
 const {
   findAllPublishForShop,
   findAllProducts,
@@ -43,9 +46,9 @@ class DiscountService {
       max_uses_per_user,
     } = payload;
     //ktra
-    if (new Date() < new Date(start_date) || new Date() > new Date(end_date)) {
-      throw new BadRequestError("Discount code is expired!");
-    }
+    // if (new Date() < new Date(start_date) || new Date() > new Date(end_date)) {
+    //   throw new BadRequestError("Discount code is expired!");
+    // }
     if (new Date(start_date) > new Date(end_date)) {
       throw new BadRequestError("start date must be before end date!");
     }
@@ -107,7 +110,20 @@ class DiscountService {
     if (discount_applies_to === "all") {
       products = await findAllProducts({
         filter: {
-          _id: { $in: discount_product_ids },
+          product_shop: convertToObjectIdMongodb(shopId),
+          isPublish: true,
+        },
+        limit: +limit,
+        page: +page,
+        sort: "ctime",
+        select: ["product_name"],
+      });
+      console.log("product: ", products);
+    }
+    if (discount_applies_to === "specific") {
+      products = await findAllProducts({
+        filter: {
+          _id: { $in: discountProductIdsToObjectId(discount_product_ids) },
           isPublish: true,
         },
         limit: +limit,
@@ -116,6 +132,8 @@ class DiscountService {
         select: ["product_name"],
       });
     }
+
+    return products;
   }
 
   //get list discount code by shop

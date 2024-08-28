@@ -4,6 +4,9 @@ const { response } = require("express");
 const _ = require("lodash");
 const { Types } = require("mongoose");
 
+const discountProductIdsToObjectId = (productIds) => {
+  return productIds.map((id) => new Types.ObjectId(id));
+};
 const convertToObjectIdMongodb = (id) => new Types.ObjectId(id);
 
 const getInfoData = ({ fileds = [], object = {} }) => {
@@ -69,4 +72,5 @@ module.exports = {
   removeUndefinedObject,
   updateNestedObjectParser,
   convertToObjectIdMongodb,
+  discountProductIdsToObjectId,
 };
