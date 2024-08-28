@@ -16,7 +16,7 @@ class DiscountController {
       message: "create discount code success!",
       metadata: await createDiscountCode({
         ...req.body,
-        shopId: req.user.userId,
+        shopId: req.body.shopId,
       }),
     }).send(res);
   };

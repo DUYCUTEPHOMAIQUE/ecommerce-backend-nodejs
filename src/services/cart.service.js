@@ -72,7 +72,7 @@ class CartService {
       return await userCart.save();
     }
 
-    //cart chua co sp nay
+    //cart ton tai va chua co sp nay
 
     const foundProductInCart = await cart.findOne({
       cart_userId: userId,
