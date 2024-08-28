@@ -11,26 +11,14 @@
     </div>
   </body>
   <script>
-    class Clothing {
-      constructor(message) {
-        this.message = message;
-      }
-      print() {
-        console.log(this.message);
-      }
-    }
-    class Electronics {
-      constructor(message) {
-        this.message = message;
-      }
-      static print() {
-        console.log(this.message);
-      }
-    }
-    const test = {
-      clothing: Clothing,
-      electronics: Electronics,
+    const product = {
+      productId: 123,
+      product_name: "quan jeans",
+      product_price: 10,
     };
-    new test["clothing"]("OK").print();
+    const product_name = "quan bo";
+    const product_price = 20;
+
+    console.log({ ...product, productId: 10, product_name, product_price });
   </script>
 </html>

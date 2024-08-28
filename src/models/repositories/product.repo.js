@@ -1,5 +1,9 @@
 "use strict";
-const { getSelectData, unGetSelect } = require("../../utils");
+const {
+  getSelectData,
+  unGetSelect,
+  convertToObjectIdMongodb,
+} = require("../../utils");
 const {
   product,
   electronic,
@@ -115,6 +119,14 @@ const updateProductById = async ({
   });
 };
 
+const getProductById = async (productId) => {
+  return product
+    .findOne({
+      _id: convertToObjectIdMongodb(productId),
+    })
+    .lean();
+};
+
 module.exports = {
   findAllDraftsProduct,
   publishProductByShop,
@@ -124,4 +136,5 @@ module.exports = {
   findAllProducts,
   findProduct,
   updateProductById,
+  getProductById,
 };
