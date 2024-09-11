@@ -15,6 +15,7 @@ const {
   findAllDiscountCodesSelect,
   checkDiscountExists,
 } = require("../models/repositories/discount.repo");
+const CheckoutService = require("./checkout.service");
 /**
     1-Generate discount code [SHOP / ADMIN]
     2-Get discount amount [USER]
@@ -239,6 +240,27 @@ class DiscountService {
     });
 
     return result;
+  }
+
+  static async orderByUser({
+    shop_order_ids,
+    cartId,
+    userId,
+    user_adsress = {},
+    user_payment = {},
+  }) {
+    const { shop_order_ids_new, checkout_order } =
+      await CheckoutService.checkoutReview({
+        cartId,
+        userId,
+        shop_order_ids,
+      });
+    const products = shop_order_ids_new.flatMap((order) => order.item_products);
+    console.log(`[1]:::`, products);
+
+    for (let index = 0; index < products.length; index++) {
+      const { quantity, productId, price } = products[index];
+    }
   }
 }
 
